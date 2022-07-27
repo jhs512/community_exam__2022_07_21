@@ -49,12 +49,16 @@ public class Rq {
         }
     }
 
-    public void appendBody(String str) {
+    public void print(String str) {
         try {
             resp.getWriter().append(str);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void println(String str) {
+        print(str + "\n");
     }
 
     public void setAttr(String name, Object value) {
@@ -90,14 +94,13 @@ public class Rq {
     public long getLongPathValueByIndex(int index, long defaultValue) {
         String value = getPathValueByIndex(index, null);
 
-        if ( value == null ) {
+        if (value == null) {
             return defaultValue;
         }
 
         try {
             return Long.parseLong(value);
-        }
-        catch ( NumberFormatException e ) {
+        } catch (NumberFormatException e) {
             return defaultValue;
         }
     }
